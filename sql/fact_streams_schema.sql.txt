@@ -1,0 +1,19 @@
+-- DDL for creating the core fact table for music streaming events
+CREATE TABLE IF NOT EXISTS `music_warehouse.fact_streams`
+(
+    event_id STRING NOT NULL,
+    date DATE NOT NULL,
+    timestamp TIMESTAMP NOT NULL,
+    artist_id STRING NOT NULL,
+    track_id STRING NOT NULL,
+    platform STRING,
+    country_code STRING,
+    is_skip BOOL,
+    seconds_played INT64,
+    revenue_generated FLOAT64
+)
+PARTITION BY 
+    date
+CLUSTER BY 
+    artist_id, 
+    platform;
